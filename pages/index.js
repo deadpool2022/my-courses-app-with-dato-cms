@@ -14,22 +14,63 @@ console.log("🚀 ~ file: index.js ~ line 4 ~ Home ~ course", course)
 
 const query = gql`
  query {
-    course {
-      id
-      name
-      slug
-      courseDetail {
-        ... on CourseHeaderRecord {
-          __typename
-          bigTitle
-          smallTitle
-          description
-          buttonText
+    
+  course {
+    id
+    name
+    courseDetail {
+      ... on CourseHeaderRecord {
+        id
+        __typename
+        smallTitle
+        bigTitle
+        buttonText
+        description
+      }
+      ... on CalloutRecord {
+        __typename
+        id
+        smallTitle
+        bigTitle
+        description
+        image {
+          id
+          url
+          width
+          height
+        }
+      }
+      ... on LearnSectionRecord {
+        __typename
+        id
+        hoursOfContent
+        numberOfLessons
+        title
+        learningPoints {
+          title
           id
         }
       }
-
+      ... on PricingSectionRecord {
+        __typename
+        title
+        id
+        pricingCards {
+          id
+          title
+          priceInCents
+          isFree
+          buttonText
+          finePrint
+          priceSuffix
+          description
+          featured
+        }
+      }
     }
+  }
+
+
   }`;
 
 
